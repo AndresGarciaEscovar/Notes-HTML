@@ -1,4 +1,4 @@
-function myFunction()
+function myFunction(my_id)
 {
- console.log("HERE!!!")
+ console.log(my_id)
 }
