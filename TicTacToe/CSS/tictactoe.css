@@ -1,3 +1,4 @@
+
 .btn-game {
     border:0px;
     margin:0px;
@@ -5,8 +6,13 @@
     width: 100px;
     text-align: center;
 }
+.center div, .center p {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}
 
- .gameboard, td {
+.gameboard, td {
     border:1px solid black;
     border-collapse:collapse;
     margin-left:auto;
@@ -17,6 +23,34 @@
     height: 30px;
     width: 30px;
 }
+
+.table-container
+{   display:flex;
+    width:50%;
+}
+
+.noborder-top td
+{
+    border-top:1px solid white;
+    border-left:1px solid white;
+    border-right:1px solid white;
+    height:20px;
+    width:100%;
+}
+
+.noborder-bottom td
+{
+    border-bottom:1px solid white;
+    border-left:1px solid white;
+    border-right:1px solid white;
+    height:40px;
+    width:100%;
+}
+
+
+
+
+
 
 
 

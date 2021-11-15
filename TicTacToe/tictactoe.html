@@ -10,43 +10,71 @@
 </head>
 <body>
     <h1>Tic-Tac-Toe</h1>
-    <div class="divgameboard">
-        <div>
-            <table class="gameboard">
-                <tr>
-                    <td class="gamecell">
-                        <button id="0" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                    <td class="gamecell">
-                        <button id="1" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                    <td class="gamecell">
-                        <button id="2" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="gamecell">
-                        <button id="3" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                    <td class="gamecell">
-                        <button id="4" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                    <td class="gamecell">
-                        <button id="5" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="gamecell">
-                        <button id="6" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                    <td class="gamecell">
-                        <button id="7" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                    <td class="gamecell">
-                        <button id="8" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                    </td>
-                </tr>
-            </table>
+    <div class="center">
+        <div class="table-container">
+            <div>
+                <table class="gameboard">
+                    <tr class="noborder-top">
+                        <td colspan=3 id="winLogo"></td>
+                    </tr>
+                    <tr>
+                        <td class="gamecell">
+                            <button id="0" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="1" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="2" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="gamecell">
+                            <button id="3" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="4" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="5" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="gamecell">
+                            <button id="6" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="7" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="8" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                        </td>
+                    </tr>
+                    <tr class="noborder-bottom">
+                        <td colspan=3>
+                            <button onclick="resetGame()">Reset Game</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table class="gameboard">
+                    <tr>
+                        <th colspan=2>Score</th>
+                    </tr>
+                    <tr>
+                        <td>Player 1</td>
+                        <td>Player 2</td>
+                    </tr>
+                    <tr>
+                        <td id="counter0">0</td>
+                        <td id="counter1">0</td>
+                    </tr>
+                    <tr class="noborder-bottom">
+                        <td colspan=2><button onclick="resetCounters()">Reset Score</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
