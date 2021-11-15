@@ -1,29 +1,42 @@
 
+function boardempty()
+{
+    empty = true
+    for(i = 0; i < board.length; i++)
+    {
+        for(j = 0; j < board[i].length; j++) empty = empty && board[i][j] == -1;
+    }
+    console.log(empty)
+}
+
 function changeIcon(cell)
 {
         // Block from more moves.
         cell.disabled = true;
 
         // Update player 1.
-        if(player1[0])
+        if(player1)
         {
-            cell.innerHTML = '<img src='  + player1[1] + '/>';
+            cell.innerHTML = '<img src='  + images[0] + '/>';
             return;
         }
+        cell.innerHTML = '<img src='  + images[1] + '/>';
+}
 
-        // Update player 2.
-        if(player1[1] == images[0])
-        {
-            cell.innerHTML = '<img src='  + images[1] + '/>';
-            return;
-        }
-        cell.innerHTML = '<img src='  + images[0] + '/>';
+function checkDraw()
+{
+    draw = true;
+    for(i = 0; i < board.length && draw; i++)
+    {
+        for(j = 0; j < board[i].length && draw; j++) draw = draw && !(board[i][j] === emptyId);
+    }
+    return draw;
 }
 
 function checkWin()
 {
     // Get the player number.
-    player = player1[0]? playerId[0] : playerId[1];
+    player = player1? playerId[0] : playerId[1];
 
     // Flags.
     winDiagonalOne = true;
@@ -64,6 +77,13 @@ function disableAll()
 
 function makeMove(cellId)
 {
+    // Toggle the sliders.
+    if(firstTime)
+    {
+        firstTime = false;
+        toggelSliders();
+    }
+
     // Update the cell.
     var cell = document.getElementById(cellId);
     changeIcon(cell);
@@ -74,29 +94,37 @@ function makeMove(cellId)
 
     // Check if somebody has won.
     win = checkWin();
-    if(win)
+    draw = checkDraw();
+    if(win || draw)
     {
         disableAll();
-        printWinMessage();
-        updateScore()
+        printEndMessage(win);
+        if(win) updateScore();
+        return;
     }
 
     // Change player.
-    player1[0] = !player1[0];
+    player1 = !player1;
 }
 
-function printWinMessage()
+function printEndMessage(win)
 {
-    // Clear the win message.
-    mssg = document.getElementById("winLogo")
-    winner = player1[0]? " 1 " : " 2 ";
-    mssg.innerHTML = "Player" + winner  + "Wins!"
+    mssg = document.getElementById("winLogo");
+
+    // Display the win message.
+    if(win)
+    {
+        winner = player1? " 1 " : " 2 ";
+        mssg.innerHTML = "Player" + winner  + "Wins!";
+        return;
+    }
+    mssg.innerHTML = "It's a draw!!";
 }
 
 function resetCounters()
 {
-    score = [0, 0]
-    updateCounters()
+    score = [0, 0];
+    updateCounters();
 }
 
 function resetGame()
@@ -106,48 +134,84 @@ function resetGame()
     {
         id = i.toString();
         cell = document.getElementById(id);
-        cell.innerHTML = ".";
+        cell.innerHTML = "";
         cell.disabled = false;
     }
 
     // Reset the board.
     for(i = 0 ; i < board.length; i++)
     {
-        for(j = 0 ; j < board[i].length; j++) board[i][j] = ".";
+        for(j = 0 ; j < board[i].length; j++) board[i][j] = emptyId;
     }
 
     // Clear the win message.
-    mssg = document.getElementById("winLogo")
-    mssg.innerHTML = ""
+    mssg = document.getElementById("winLogo");
+    mssg.innerHTML = "";
 
-    // Reset the player.
-    player1[0] = true
+    // Reset the sliders and the flags.
+    if(document.getElementById("checkbox1").disabled) toggelSliders()
+    player1 = true;
+    firstTime = true
 }
 
 function updateBoard(moveId)
 {
     var coordinates = [Math.floor(moveId / 3), moveId % 3];
-    board[coordinates[0]][coordinates[1]] = player1[0]? playerId[0] : playerId[1];
+    board[coordinates[0]][coordinates[1]] = player1? playerId[0] : playerId[1];
 }
 
 function updateCounters()
 {
     for(i = 0; i < 2; i++)
     {
-        counter = i.toString()
-        counter = document.getElementById("counter" + i)
-        counter.innerHTML = score[i].toString()
+        counter = i.toString();
+        counter = document.getElementById("counter" + i);
+        counter.innerHTML = score[i].toString();
     }
 }
 
 function updateScore()
 {
-    player1[0]? score[0] += 1 : score[1] += 1;
-    updateCounters()
+    player1? score[0] += 1 : score[1] += 1;
+    updateCounters();
 }
 
-var board = [[".", ".", "."], [".", ".", "."], [".", ".", "."]];
+function switchImage(sliderId)
+{
+    if(sliderId === "checkbox0")
+    {
+        checkbox = document.getElementById("checkbox1");
+        checkbox.checked = !checkbox.checked;
+    }
+    else
+    {
+        checkbox = document.getElementById("checkbox0");
+        checkbox.checked = !checkbox.checked;
+    }
+
+    imagesTmp = images[0];
+    images[0] = images[1];
+    images[1] = imagesTmp;
+}
+
+function toggelSliders()
+{
+    checkbox0 = document.getElementById("checkbox0");
+    checkbox1 = document.getElementById("checkbox1");
+
+    checkbox0.disabled = !checkbox0.disabled;
+    checkbox1.disabled = !checkbox1.disabled;
+}
+
+var emptyId = -1
+var board = [[emptyId, emptyId, emptyId], [emptyId, emptyId, emptyId], [emptyId, emptyId, emptyId]];
 var images = ["./Images/icon1.png", "./Images/icon2.png"];
-var player1 = [true, images[0]];
+var player1 = true;
 var playerId = [0, 1];
 var score = [0, 0]
+var firstTime = true
+
+
+
+
+

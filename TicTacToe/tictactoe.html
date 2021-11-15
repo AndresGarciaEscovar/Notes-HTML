@@ -11,7 +11,7 @@
 <body>
     <h1>Tic-Tac-Toe</h1>
     <div class="center">
-        <div class="table-container">
+        <div class="table-container-0">
             <div>
                 <table class="gameboard">
                     <tr class="noborder-top">
@@ -19,35 +19,35 @@
                     </tr>
                     <tr>
                         <td class="gamecell">
-                            <button id="0" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                            <button id="0" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
                         </td>
                         <td class="gamecell">
-                            <button id="1" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                            <button id="1" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
                         </td>
                         <td class="gamecell">
-                            <button id="2" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="gamecell">
-                            <button id="3" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                        </td>
-                        <td class="gamecell">
-                            <button id="4" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
-                        </td>
-                        <td class="gamecell">
-                            <button id="5" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                            <button id="2" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
                         </td>
                     </tr>
                     <tr>
                         <td class="gamecell">
-                            <button id="6" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                            <button id="3" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
                         </td>
                         <td class="gamecell">
-                            <button id="7" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                            <button id="4" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
                         </td>
                         <td class="gamecell">
-                            <button id="8" onclick="makeMove(this.id)" class="btn-game" type="button">.</button>
+                            <button id="5" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="gamecell">
+                            <button id="6" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="7" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
+                        </td>
+                        <td class="gamecell">
+                            <button id="8" onclick="makeMove(this.id)" class="btn-game" type="button"></button>
                         </td>
                     </tr>
                     <tr class="noborder-bottom">
@@ -72,6 +72,48 @@
                     </tr>
                     <tr class="noborder-bottom">
                         <td colspan=2><button onclick="resetCounters()">Reset Score</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="table-container-1">
+            <div>
+                <table>
+                    <tr class="center">
+                        <td colspan="3">Player 1</td>
+                    </tr>
+                    <tr class="center">
+                        <td><img src="./Images/icon1.png"></td>
+                        <td>
+                            <label class="switch">
+                                <input id="checkbox0" name="player0" onclick="switchImage(this.id)" type="checkbox">
+                                    <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><img src="./Images/icon2.png"></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr class="center">
+                        <td colspan="3">Player 2</td>
+                    </tr>
+                    <tr class="center">
+                        <td>
+                            <img src="./Images/icon1.png">
+                        </td>
+                        <td>
+                            <label class="switch">
+                                <input id="checkbox1" name="player0" onclick="switchImage(this.id)" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <img src="./Images/icon2.png">
+                        </td>
                     </tr>
                 </table>
             </div>
