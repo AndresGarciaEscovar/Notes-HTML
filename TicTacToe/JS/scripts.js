@@ -17,10 +17,10 @@ function changeIcon(cell)
         // Update player 1.
         if(player1)
         {
-            cell.innerHTML = '<img src='  + images[0] + '/>';
+            cell.innerHTML = '<img src='  + images[0] + '>';
             return;
         }
-        cell.innerHTML = '<img src='  + images[1] + '/>';
+        cell.innerHTML = '<img src='  + images[1] + '>';
 }
 
 function checkDraw()
@@ -210,8 +210,3 @@ var player1 = true;
 var playerId = [0, 1];
 var score = [0, 0]
 var firstTime = true
-
-
-
-
-
