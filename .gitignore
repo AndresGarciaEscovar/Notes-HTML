@@ -1,3 +1,6 @@
 # Ignore Pycharm folders.
 .idea
 **.idea**
+
+# Ignore mac files.
+**.DS_Store
