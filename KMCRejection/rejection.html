@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>KMC Rejection Algorithm</title>
+</head>
+<body>
+    <h1>Kinetic Monte Carlo (KMC) Rejection Algorithm</h1>
+    <h2>What is a KMC algorithm?</h2>
+    <p>
+        A <b>KMC</b> algorithm is a computer algorithm that intends to replicate
+        the behavior of systems that are not necessarily in equilibrium.
+        <b>KMC</b> simulations try to give insights on the behavior of systems 
+        that interact through different processes that can occur within a well
+        defined set of rules. What characterizes <b>KMC</b> simulations from
+        other Monte Carlo methods, is that <b>KMC</b> algorithms try to make
+        a more thorough exploration of the accessible states to a system, thus
+        giving insight of the different pathways from a given state to a
+        different state, without going through, potentially, unphysical states.
+        This is useful to calculate non-equilibrium, and thermodynamic,
+        properties of the systems.
+    </p>
+    <p>
+        There are limitations, however, since <b>KMC</b> simulations requires
+        the user to input the rates of each process of the system, i.e., the
+        simulations itself cannot calculate the rates. Thus, the rates must be
+        calculated through theory or experiment.
+    </p>
+    <p>
+        It is important to notice that <b>KMC</b> simulations assume that the
+        processes are Poisson distributed, such that the time evolution is
+        \[\Delta t = \ln(n)/R_{tot}\]
+        where \(R_{tot}\) is total rate of the system and \(n\) is a random
+        number in the range \((0,1)\); a proper demonstration can be found
+        <a href="https://en.wikipedia.org/wiki/Kinetic_Monte_Carlo"
+        target="_blank">here</a>.
+    </p>
+    <h2>What is the KMC algorithm?</h2>
+</body>
+</html>
