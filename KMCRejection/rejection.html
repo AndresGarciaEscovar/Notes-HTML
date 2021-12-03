@@ -10,19 +10,27 @@
 </head>
 <body>
     <h1>Kinetic Monte Carlo (KMC) Rejection Algorithm</h1>
+    <abstract>
+        The goal of this article is to provide a visualization of how Kinetic
+        Monte Carlo (<b>KMC</b>) algorithms work, rather than discuss the technicallities
+        or the correctness of the algorithms themselves.
+    </abstract>
     <h2>What is a KMC algorithm?</h2>
     <p>
         A <b>KMC</b> algorithm is a computer algorithm that intends to replicate
-        the behavior of systems that are not necessarily in equilibrium.
-        <b>KMC</b> simulations try to give insights on the behavior of systems 
-        that interact through different processes that can occur within a well
-        defined set of rules. What characterizes <b>KMC</b> simulations from
-        other Monte Carlo methods, is that <b>KMC</b> algorithms try to make
-        a more thorough exploration of the accessible states to a system, thus
-        giving insight of the different pathways from a given state to a
-        different state, without going through, potentially, unphysical states.
-        This is useful to calculate non-equilibrium, and thermodynamic,
-        properties of the systems.
+        the behavior of systems that are not necessarily in equilibrium. This is
+        done by coarse graining the system to provide an atomistic landscape. 
+        <b>KMC</b> simulations try to give insights on the behavior of these
+        type of systems, where the interactions and/or interplay between the
+        different elements of the system occurs through different processes that
+        can occur within a well defined set of rules. What characterizes
+        <b>KMC</b> simulations from other Monte Carlo methods, is that
+        <b>KMC</b> algorithms try to make a more thorough exploration of the
+        accessible states to a system, given an initial state, thus giving
+        insight of the different pathways from a given state to a different
+        state, without going through, potentially, unphysical states. This is
+        useful to calculate non-equilibrium, and thermodynamic, properties of
+        the systems <span class="andersen2019"></span>.
     </p>
     <p>
         There are limitations, however, since <b>KMC</b> simulations requires
@@ -39,6 +47,91 @@
         <a href="https://en.wikipedia.org/wiki/Kinetic_Monte_Carlo"
         target="_blank">here</a>.
     </p>
-    <h2>What is the KMC algorithm?</h2>
+    <h2>What is the algorithm for KMC simulations?</h2>
+    <p>
+        There are several ways in which the <b>KMC</b> algorithm can be
+        formulated, but the escence remains the same. There are two major ways
+        in which the algorithm can be expressed. The first way is to use it as
+        in the original way it was formulated in <span class="young1966"></span>
+        or as formulated by <span class="bortz1975"></span>. These algorithms
+        are equivalent, but they both come with their challenges. Of course,
+        there are hybrid ways in which a combination of both strategies can be
+        implemented.
+    </p>
+    <p>
+        The first algorithm <span class="young1966"></span> is often referred to
+        as an algorithm with <i>rejection</i> algorithm, and as this kind of
+        algorithm will be referred to in the remainder of this article. A
+        rejection algorithm, in this context, is an algorithm that can
+        potentially choose processes that are forbidden for a particular
+        component of the system, but if the process is not valid, it just
+        ignores, or <i>rejects</i> the move and continues onto the next attempt
+        to perform a move.
+    </p>
+    <p>
+        The second algorithm <span class="bortz1975"></span> is often referred
+        to an algorithm without <i>rejection</i>. This kind of algorithm will be
+        referred to as a <i>non-rejection</i> algorithm in the remainder of this
+        article. A rejection algorithm, in this context, is an algorithm that
+        keeps track of what process can be performed by each component of the
+        system and the list of available process is updated after each move
+        attempt. Thus, making each attempt, of the system undergoing a change,
+        successful.
+    </p>
+    <p>
+        Both algorithms have their strengths and their shortcomings. If one
+        chooses to implement a rejection algorithm, the limiting factor is the
+        amount of rejection that the system might have. Since there is no
+        updating to be done, the time order at which the next move is performed
+        is \(O_{t}(c)\), where \(c\) is a constant. However, the time scale at
+        which there is significant change in the system might be inaccessible,
+        even for state of the art super-computers. As for the memory required,
+        to store moves, there will not be any need for additional use of
+        computer memory to track the sites with valid moves. Thus, the amount of
+        memory needed will always be the same, i.e., in an exact way the scaling
+        of the memory required to keep track of the system will be constant and
+        independent of the size of the system.
+    </p>
+    <p>
+        In the case of <i>non-rejection</i> algorithms, the limiting factor is
+        the number of sites that must be updated after each event, but the
+        relation tends to be \(O(n_u)\) at the best and \(O(n_u\log(n_u))\) at
+        worst, where \(n_u\) is the number of updates per cycle. The scaling
+        in memory scales linearly with the size of the system, for
+        every processes there is a list that contains the possible events.
+        Typically, the number of potential events of the same kind are of the
+        order of the lattice size, in general \(N_{p}\propto N\), so that the
+        scaling of the memory required with system size increases linearly with
+        the number of processes as \(O(n\log(n))\) at the worst. Using clever
+        techniques one can achive and \(O(n)\) scaling.
+    </p>
+
+
+    <h2>Bibliography</h2>
+    <ol>
+        <li id="andersen2019"> M. Andersen, C. Panosetti and K. Reuter. A
+            practical guide to surface Kinetic Monte Carlo simulations.
+            <a href="https://doi.org/10.3389/fchem.2019.00202" target="_blank">
+                https://doi.org/10.3389/fchem.2019.00202
+            </a>
+        </li>
+        <li id="young1966">
+            W. M. Young and E. W. Elcock. Monte Carlo studies of vacancy
+            migration in binary ordered alloys: I. <i>Proc. Phys. Soc.</i>,
+            Volume 89, 735-746, 1966.
+            <a href="http://doi.org/10.1088/0370-1328/89/3/329" target="_blank">
+                http://doi.org/10.1088/0370-1328/89/3/329
+            </a>
+            
+        </li>
+        <li id="borzt1975">
+            A. B. Bortz, M. H. Kalos and J. L. Lebowitz. A new algorithm for
+            Monte Carlo simulation of Ising spin systems. <i>Journal of
+            Computational Physics</i>, Volume 17, 10-18, 1975.
+            <a href="https://doi.org/10.1016/0021-9991(75)90060-1" target="_blank">
+            https://doi.org/10.1016/0021-9991(75)90060-1
+            </a>
+        </li>
+    <ol>
 </body>
 </html>
