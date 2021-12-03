@@ -95,15 +95,18 @@
     <p>
         In the case of <i>non-rejection</i> algorithms, the limiting factor is
         the number of sites that must be updated after each event, but the
-        relation tends to be \(O(n_u)\) at the best and \(O(n_u\log(n_u))\) at
-        worst, where \(n_u\) is the number of updates per cycle. The scaling
-        in memory scales linearly with the size of the system, for
-        every processes there is a list that contains the possible events.
-        Typically, the number of potential events of the same kind are of the
-        order of the lattice size, in general \(N_{p}\propto N\), so that the
-        scaling of the memory required with system size increases linearly with
-        the number of processes as \(O(n\log(n))\) at the worst. Using clever
-        techniques one can achive and \(O(n)\) scaling.
+        relation tends to be \(O_t(n_u)\) at the best and \(O_t(n_u\log(n_u))\)
+        at worst, where \(n_u\) is the number of updates per cycle. The relation
+        \(O_t(n_u\log(n_u))\) appears since the site could be updated for more
+        than one processes. The scaling in memory is linear with the size of the
+        system, for every processes there is a list that contains the possible
+        events. Typically, the number of potential events of the same kind are
+        of the order of the lattice size, in general \(N_{p}\propto N\), so that
+        the scaling of the memory required with system size increases linearly
+        with the number of processes as \(O(n)\) at the worst; in reality, the
+        scaling is \(O(cn)\), where \(c\) is the size of the system. Of course,
+        specific systems can have better performance, i.e., sub-\(O(n)\), but 
+        the typical simulations usually scale like \(O(cn)\).
     </p>
 
 
