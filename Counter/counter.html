@@ -15,10 +15,14 @@
     <table class="center">
         <tr>
             <td>
-                <button class="button-base">+1</button>
+                <button id="add"
+                        class="button-base"
+                        onclick="updateCounter('add')">+1</button>
             </td>
             <td>
-                <button class="button-base button-longer">+ Custom</button>
+                <button id="add-custom"
+                        class="button-base button-longer"
+                        onclick="updateCounter('add-custom')">+ Custom</button>
             </td>
             <td class="column-padding">
                 <textarea class="textarea-input"
@@ -29,10 +33,14 @@
 
         <tr>
             <td>
-                <button class="button-base">-1</button>
+                <button id="subtract"
+                        class="button-base"
+                        onclick="updateCounter('subtract')">-1</button>
             </td>
             <td>
-                <button class="button-base button-longer">- Custom</button>
+                <button id="subtract-custom"
+                        class="button-base button-longer"
+                        onclick="updateCounter('subtract-custom')">- Custom</button>
             </td>
             <td class="column-padding">
                 <textarea class="textarea-input"

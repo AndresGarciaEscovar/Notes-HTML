@@ -3,19 +3,25 @@
 // Constants and Variables
 // #############################################################################
 
+
 // -----------------------------------------------------------------------------
 // Constants
 // -----------------------------------------------------------------------------
 
-const MAX_NUMBER_LENGTH = 14;
+
+// String value constants.
 const MAX_NUMBER_STRING = "99999999999999";
+const MAX_NUMBER_LENGTH = MAX_NUMBER_STRING.length;
+
 
 // -----------------------------------------------------------------------------
 // Variables
 // -----------------------------------------------------------------------------
 
+
 // Counter history.
 let history = ["0", "0", "0"];
+
 
 // #############################################################################
 // Functions
@@ -25,6 +31,13 @@ let history = ["0", "0", "0"];
 // -----------------------------------------------------------------------------
 // Get Functions
 // -----------------------------------------------------------------------------
+
+
+function getAdd(operation)
+{
+   console.log(operation);    
+}
+
 
 /**
  * Gets the integer that corresponds to the element id of the 
@@ -50,7 +63,48 @@ function getHistoryIndex(elemId)
 
 
 // -----------------------------------------------------------------------------
-// Set Functions.
+// Remove Functions
+// -----------------------------------------------------------------------------
+
+
+/**
+ * Removes the leading zeros from the string.
+ * 
+ * @param elemValue Removes all the leading zeros from the string.
+ *  
+ * @returns The string with the leading zeros removed.
+ */
+function removeZeros(elemValue)
+{
+    // Temporary string.
+    let value = "";
+    let removeZero = true;
+
+    for(let i = 0; i < elemValue.length; i++)
+    {
+        // Check the first entry.
+        if(i == 0 && elemValue[i] == "-")
+        {
+            value += "" + elemValue[i];
+            continue;
+        }
+        
+        // Check the rest of the string.
+        removeZero = removeZero && elemValue[i] == "0";
+
+        // If the number needs to be added.
+        if(!removeZero) value += elemValue[i];
+    }
+
+    // Return zero if needed.
+    if(value == "-" || value == "") return "0";
+
+    return value;
+}
+
+
+// -----------------------------------------------------------------------------
+// Set Functions
 // -----------------------------------------------------------------------------
 
 
@@ -66,7 +120,7 @@ function setCounter(elemId)
 
     // Get the html element.
     let element = document.getElementById(elemId);
-    let elemVal = element.value;
+    let elemVal = removeZeros(element.value);
 
     // Get the history index.
     let elemNum = getHistoryIndex(elemId);
@@ -104,11 +158,27 @@ function setCounter(elemId)
     // Verify the length of the string.
     if(numberLength > MAX_NUMBER_LENGTH)
     {
-        history[elemNum] = "999 " + parseInt(elemVal);
-        element.value = history[elemNum];    
+        history[elemNum] = parseInt(MAX_NUMBER_STRING);
+        if(elemVal[0] == "-") history[elemNum] = - history[elemNum];
+        element.value = history[elemNum];
+        return;
     }
 
+    // Update the counter.
     history[elemNum] = "" + parseInt(elemVal);
     element.value = history[elemNum];
     return;
+}
+
+
+// -----------------------------------------------------------------------------
+// Update Functions
+// -----------------------------------------------------------------------------
+
+
+function updateCounter(operation)
+{ 
+    // Get the value to add.
+    let toAdd = getAdd(operation);
+    
 }
