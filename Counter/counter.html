@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="counter.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header-main">Counter App</h1>
+    <div>
+        <h2 id="label-counter">0</h2>
+    </div>
+    <table class="center">
+        <tr>
+            <td>
+                <button class="button-base">+1</button>
+            </td>
+            <td>
+                <button class="button-base button-longer">+ Custom</button>
+            </td>
+            <td class="column-padding">
+                <textarea class="textarea-input"
+                          id="textarea-add"
+                          oninput="setCounter('textarea-add')">0</textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button class="button-base">-1</button>
+            </td>
+            <td>
+                <button class="button-base button-longer">- Custom</button>
+            </td>
+            <td class="column-padding">
+                <textarea class="textarea-input"
+                          id="textarea-subtract"
+                          oninput="setCounter('textarea-subtract')">0</textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button class="button-base">Reset</button>
+            </td>
+            <td>
+                <button class="button-base button-longer">Reset Custom</button>
+            </td>
+            <td class="column-padding">
+                <textarea class="textarea-input" 
+                           id="textarea-reset"
+                           rows=1
+                           cols=20
+                           oninput="setCounter('textarea-reset')">0</textarea>
+            </td>
+        </tr>
+    </table>
+    <script src="counter.js"></script>
+</body>
+</html>
