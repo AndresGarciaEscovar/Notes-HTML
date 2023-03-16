@@ -67,6 +67,27 @@
                            oninput="setCounter('textarea-reset')">0</textarea>
             </td>
         </tr>
+
+        <tr>
+            <td colspan="3"
+                id="column-savedelete">
+                <button class="button-base button-longer"
+                        id ="button-save"
+                        onclick="save(true)">Save</button>
+                <button class="button-base button-longer"
+                        id ="button-delete"
+                        onclick="save(false)">Delete</button>
+            </td>
+        </tr>
+
+        <tr>           
+            <td  colspan="3">
+                <select id="select-menu">
+                </select>
+            </td>
+        </tr>
+
+
     </table>
     <script src="counter.js"></script>
 </body>

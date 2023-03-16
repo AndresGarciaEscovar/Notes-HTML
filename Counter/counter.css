@@ -4,14 +4,17 @@
     height: 30px;
 }
 
+
 .button-longer {
     width:125px;
 }
+
 
 .center {
     margin-left: auto;
     margin-right: auto;
 }
+
 
 .column-padding {
     padding-top: 6px;
@@ -25,13 +28,24 @@
     padding-top: 5px;
 }
 
+
+#column-savedelete {
+    text-align: center;
+}
+
+
 #header-main {
     color: blue;
     text-align: center;
 }
+
 
 #label-counter {
     text-align: center;
 }
 
 
+#select-menu {
+    height: 30px;
+    width: 100%;
+}
