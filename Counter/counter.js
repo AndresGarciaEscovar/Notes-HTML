@@ -34,46 +34,6 @@ let counter = 0;
 // Get Functions
 // -----------------------------------------------------------------------------
 
-/**
- * 
- * @param operation 
- */
-function getAdd(operation)
-{
-    // Auxiliary counter.
-    let element = null;
-    let number = 0;
-
-    // Obtain the number.
-    if(operation == "add" || operation == "subtract")
-    {
-        number = operation == "add"? 1 : -1;
-    }
-    else{
-        
-        if(operation == "add-custom")
-        {
-            element = document.getElementById("textarea-add");
-        }
-        else
-        {
-            element = document.getElementById("textarea-subtract");
-        }
-        
-        number = parseInt(element.value);
-        number = operation == "add-custom"? number : -number;
-    }
-
-    // Add to the counter and fix it.
-    counter = counter + number;
-    if (counter > MAX_NUMBER) counter = MAX_NUMBER;
-    if (counter < -MAX_NUMBER) counter = -MAX_NUMBER;
-
-    // Update the counter.
-    element = document.getElementById("label-counter");
-    element.innerHTML = counter;
-}
-
 
 /**
  * Gets the integer that corresponds to the element id of the 
@@ -211,10 +171,61 @@ function setCounter(elemId)
 // Update Functions
 // -----------------------------------------------------------------------------
 
-
+/**
+ * Adds the given number to the counter, provided that the operation is valid 
+ * and updates the counter label.
+ * 
+ * @param operation The operation that is being performed.
+ */
 function updateCounter(operation)
 { 
-    // Get the value to add.
-    let toAdd = getAdd(operation);
+    // Auxiliary counter.
+    let element = null;
+    let number = 0;
+
+    // Obtain the number.
+    if(operation == "add" || operation == "subtract")
+    {
+        number = operation == "add"? 1 : -1;
+    }
+    else{
+        
+        if(operation == "add-custom")
+        {
+            element = document.getElementById("textarea-add");
+        }
+        else
+        {
+            element = document.getElementById("textarea-subtract");
+        }
+        
+        number = parseInt(element.value);
+        number = operation == "add-custom"? number : -number;
+    }
+
+    // Add to the counter and fix it.
+    counter = counter + number;
+    if (counter > MAX_NUMBER) counter = MAX_NUMBER;
+    if (counter < -MAX_NUMBER) counter = -MAX_NUMBER;
+
+    // Update the counter.
+    element = document.getElementById("label-counter");
+    element.innerHTML = counter;
+}
+
+/**
+ * Resets the counter to zero or the custom value.
+ * 
+ * @param toZero Flag that determines if the counter must be set to zero or
+ * the custom value. It's 'true', if it must be set to zero; 'false', otherwise.
+ */
+function updateReset(toZero)
+{ 
+    // Reset the counter.
+    counter = parseInt(document.getElementById('textarea-reset').value);
+    if(toZero) counter = 0;
     
+    // Update the counter.
+    element = document.getElementById("label-counter");
+    element.innerHTML = counter;
 }

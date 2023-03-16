@@ -51,10 +51,13 @@
 
         <tr>
             <td>
-                <button class="button-base">Reset</button>
+                <button class="button-base"
+                        onclick="updateReset(true)">Reset</button>
             </td>
             <td>
-                <button class="button-base button-longer">Reset Custom</button>
+                <button class="button-base button-longer"
+                        id ="reset-custom"
+                        onclick="updateReset(false)">Reset Custom</button>
             </td>
             <td class="column-padding">
                 <textarea class="textarea-input" 
