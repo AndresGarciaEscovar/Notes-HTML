@@ -16,6 +16,29 @@ const MAX_NUMBER_LENGTH = MAX_NUMBER_STRING.length;
 
 
 // -----------------------------------------------------------------------------
+// Classes
+// -----------------------------------------------------------------------------
+
+
+class CDate
+{
+    constructor(cntr)
+    {
+        this.string_date = (new Date()).toLocaleString("en-US", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit",
+            fractionalSecondDigits: 3
+        });
+        this.integer_cntr = cntr;
+    }
+}
+
+
+// -----------------------------------------------------------------------------
 // Variables
 // -----------------------------------------------------------------------------
 
@@ -23,6 +46,10 @@ const MAX_NUMBER_LENGTH = MAX_NUMBER_STRING.length;
 // Counter history.
 let history = ["0", "0", "0"];
 let counter = 0;
+
+
+// Counter save container.
+let container = [];
 
 
 // #############################################################################
@@ -96,6 +123,51 @@ function removeZeros(elemValue)
     if(value == "-" || value == "") return "0";
 
     return value;
+}
+
+
+// -----------------------------------------------------------------------------
+// Save Functions
+// -----------------------------------------------------------------------------
+
+
+/**
+ * Saves/deletes the selected save counter; the delete operation cannot be
+ * undone.
+ * 
+ * @param toSave Boolean flag that determines if the counter must be saved or
+ * the selected entry deleted. Deletions cannot be undone. It's 'true', if the 
+ * counter must be saved; 'false', othersiwe.
+*/
+function save(toSave) 
+{
+    // Auxiliary variables.
+    let temp = [];
+    let index = 0;
+
+    // Update the container.
+    if(toSave)
+    {
+        container.push(new CDate(counter));
+    }
+    else
+    {
+        // The selected element.
+        index = (document.querySelector("#select-menu")).selectedIndex;
+        
+        // Remove the index.
+        for(let i = 0; i < container.length; i++)
+        {
+            if(i == index) continue;
+            temp.push(container[i]);
+        }
+        
+        // Update the container.
+        container = temp;
+    }
+    
+    // Update the dropdown menu.
+    updateDropdown();
 }
 
 
@@ -213,6 +285,40 @@ function updateCounter(operation)
     element.innerHTML = counter;
 }
 
+
+
+/**
+ * Updates the content of the dropdown menu.
+*/
+function updateDropdown()
+{
+    // Auxiliary variables.
+    let element = document.getElementById("select-menu");
+    let i = 0;
+    let option = null;
+    let str = "";
+    
+    // Remove all the content.
+    element.textContent = "";
+    if(container.length == 0) return;
+
+    // Update the elements.
+    for(i = 0; i < container.length; i++)
+    {
+        str = container[i].string_date + " - " + container[i].integer_cntr;
+        
+        option = document.createElement("option");
+        option.value = "" + i;
+        option.innerHTML = str;
+
+        element.appendChild(option);
+    }
+
+    // Set to the last index.
+    element.selectedIndex = container.length - 1;
+}
+
+
 /**
  * Resets the counter to zero or the custom value.
  * 
@@ -229,33 +335,4 @@ function updateReset(toZero)
     // Update the counter.
     element = document.getElementById("label-counter");
     element.innerHTML = counter;
-}
-
-
-// -----------------------------------------------------------------------------
-// Save Functions
-// -----------------------------------------------------------------------------
-
-
-/**
- * Saves/deletes the selected save counter; the delete operation cannot be
- * undone.
- * 
- * @param toSave Boolean flag that determines if the counter must be saved or
- * the selected entry deleted. Deletions cannot be undone. It's 'true', if the 
- * counter must be saved; 'false', othersiwe.
-*/
-function save(toSave) 
-{
-    
-
-    // If the counter must be saved.
-    if(toSave)
-    {
-
-        return;
-    }
-    
-    // State must be removed.
-    return;
 }
