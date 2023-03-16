@@ -41,7 +41,7 @@ let counter = 0;
  * @param elemId The id of the element for which to get the numerical value.
  * 
  * @return An integer with the numerical id of the history element. 
- */
+*/
 function getHistoryIndex(elemId)
 {
     // Get the id of the container to update.
@@ -69,7 +69,7 @@ function getHistoryIndex(elemId)
  * @param elemValue Removes all the leading zeros from the string.
  *  
  * @return The string with the leading zeros removed.
- */
+*/
 function removeZeros(elemValue)
 {
     // Temporary string.
@@ -176,7 +176,7 @@ function setCounter(elemId)
  * and updates the counter label.
  * 
  * @param operation The operation that is being performed.
- */
+*/
 function updateCounter(operation)
 { 
     // Auxiliary counter.
@@ -216,9 +216,10 @@ function updateCounter(operation)
 /**
  * Resets the counter to zero or the custom value.
  * 
- * @param toZero Flag that determines if the counter must be set to zero or
- * the custom value. It's 'true', if it must be set to zero; 'false', otherwise.
- */
+ * @param toZero Boolean flag that determines if the counter must be set to zero
+ * or the custom value. It's 'true', if it must be set to zero; 'false',
+ * otherwise.
+*/
 function updateReset(toZero)
 { 
     // Reset the counter.
@@ -228,4 +229,33 @@ function updateReset(toZero)
     // Update the counter.
     element = document.getElementById("label-counter");
     element.innerHTML = counter;
+}
+
+
+// -----------------------------------------------------------------------------
+// Save Functions
+// -----------------------------------------------------------------------------
+
+
+/**
+ * Saves/deletes the selected save counter; the delete operation cannot be
+ * undone.
+ * 
+ * @param toSave Boolean flag that determines if the counter must be saved or
+ * the selected entry deleted. Deletions cannot be undone. It's 'true', if the 
+ * counter must be saved; 'false', othersiwe.
+*/
+function save(toSave) 
+{
+    
+
+    // If the counter must be saved.
+    if(toSave)
+    {
+
+        return;
+    }
+    
+    // State must be removed.
+    return;
 }
