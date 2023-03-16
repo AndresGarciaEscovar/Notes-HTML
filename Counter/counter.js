@@ -10,7 +10,8 @@
 
 
 // String value constants.
-const MAX_NUMBER_STRING = "99999999999999";
+const MAX_NUMBER = 99999999999999;
+const MAX_NUMBER_STRING = "" + MAX_NUMBER;
 const MAX_NUMBER_LENGTH = MAX_NUMBER_STRING.length;
 
 
@@ -21,6 +22,7 @@ const MAX_NUMBER_LENGTH = MAX_NUMBER_STRING.length;
 
 // Counter history.
 let history = ["0", "0", "0"];
+let counter = 0;
 
 
 // #############################################################################
@@ -32,10 +34,44 @@ let history = ["0", "0", "0"];
 // Get Functions
 // -----------------------------------------------------------------------------
 
-
+/**
+ * 
+ * @param operation 
+ */
 function getAdd(operation)
 {
-   console.log(operation);    
+    // Auxiliary counter.
+    let element = null;
+    let number = 0;
+
+    // Obtain the number.
+    if(operation == "add" || operation == "subtract")
+    {
+        number = operation == "add"? 1 : -1;
+    }
+    else{
+        
+        if(operation == "add-custom")
+        {
+            element = document.getElementById("textarea-add");
+        }
+        else
+        {
+            element = document.getElementById("textarea-subtract");
+        }
+        
+        number = parseInt(element.value);
+        number = operation == "add-custom"? number : -number;
+    }
+
+    // Add to the counter and fix it.
+    counter = counter + number;
+    if (counter > MAX_NUMBER) counter = MAX_NUMBER;
+    if (counter < -MAX_NUMBER) counter = -MAX_NUMBER;
+
+    // Update the counter.
+    element = document.getElementById("label-counter");
+    element.innerHTML = counter;
 }
 
 
@@ -44,7 +80,7 @@ function getAdd(operation)
  *
  * @param elemId The id of the element for which to get the numerical value.
  * 
- * @returns An integer with the numerical id of the history element. 
+ * @return An integer with the numerical id of the history element. 
  */
 function getHistoryIndex(elemId)
 {
@@ -72,7 +108,7 @@ function getHistoryIndex(elemId)
  * 
  * @param elemValue Removes all the leading zeros from the string.
  *  
- * @returns The string with the leading zeros removed.
+ * @return The string with the leading zeros removed.
  */
 function removeZeros(elemValue)
 {
