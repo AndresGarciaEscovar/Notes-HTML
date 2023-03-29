@@ -142,32 +142,28 @@ function removeZeros(elemValue)
 function save(toSave) 
 {
     // Auxiliary variables.
-    let temp = [];
-    let index = 0;
+    let index = -1;
 
     // Update the container.
     if(toSave)
     {
         container.push(new CDate(counter));
+        index = container.length - 1;
     }
     else
     {
         // The selected element.
         index = (document.querySelector("#select-menu")).selectedIndex;
+
+        // No need to continue.
+        if (index < 0) return;
         
         // Remove the index.
-        for(let i = 0; i < container.length; i++)
-        {
-            if(i == index) continue;
-            temp.push(container[i]);
-        }
-        
-        // Update the container.
-        container = temp;
+        container.splice(index, 1);
     }
     
     // Update the dropdown menu.
-    updateDropdown();
+    updateDropdown(toSave, index);
 }
 
 
@@ -228,6 +224,7 @@ function setCounter(elemId)
     {
         history[elemNum] = parseInt(MAX_NUMBER_STRING);
         if(elemVal[0] == "-") history[elemNum] = - history[elemNum];
+        
         element.value = history[elemNum];
         return;
     }
@@ -235,7 +232,26 @@ function setCounter(elemId)
     // Update the counter.
     history[elemNum] = "" + parseInt(elemVal);
     element.value = history[elemNum];
-    return;
+}
+
+
+/**
+ * Updates the counter to that of the one in the selected saved date.
+*/
+function setFromDate()
+{
+    // Auxiliary variables.
+    let index = (document.querySelector("#select-menu")).selectedIndex;
+
+    // No need to do anything.
+    if(index < 0) return;
+    
+    // Set the counter and update it.
+    counter = container[index].integer_cntr;
+
+    // Update the counter.
+    element = document.getElementById("label-counter");
+    element.innerHTML = counter;
 }
 
 
@@ -286,33 +302,43 @@ function updateCounter(operation)
 }
 
 
-
 /**
  * Updates the content of the dropdown menu.
+ * 
+ * @param toSave Boolean flag that determines if the counter must be saved or
+ * the selected entry deleted. Deletions cannot be undone. It's 'true', if the 
+ * counter must be saved; 'false', othersiwe.
+ * 
+ * @param index The index that is being removed, if it's being removed. 
 */
-function updateDropdown()
+function updateDropdown(toSave, index)
 {
     // Auxiliary variables.
     let element = document.getElementById("select-menu");
-    let i = 0;
-    let option = null;
-    let str = "";
+    let tag = null;
     
-    // Remove all the content.
-    element.textContent = "";
-    if(container.length == 0) return;
-
-    // Update the elements.
-    for(i = 0; i < container.length; i++)
+    // Add or remove the tag.
+    if(toSave)
     {
-        str = container[i].string_date + " - " + container[i].integer_cntr;
-        
-        option = document.createElement("option");
-        option.value = "" + i;
-        option.innerHTML = str;
+        // Extract the variables.
+        let tcounter = container[index].integer_cntr;
+        let date = container[index].string_date;
 
-        element.appendChild(option);
+        // Create the tag.
+        tag = document.createElement("option");
+        tag.value = "" + date;
+        tag.innerText = "" + date + " - " + tcounter;
+        
+        // Add the tag.
+        element.appendChild(tag);
     }
+    else
+    {
+        // Remove the child.
+        element.children[index].remove();
+    }
+
+    console.log("Container length: " + container.length)
 
     // Set to the last index.
     element.selectedIndex = container.length - 1;
