@@ -7,10 +7,40 @@
     <title>Apache 2 Server - Notes</title>
 </head>
 <style>
+    * {
+        box-sizing: border-box;
+        font-size: 15pt;
+    }
+
+    h1 {
+        font-size: 30pt;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 20pt;
+        text-decoration: underline;
+    }
+
+    h3 {
+        font-size: 18pt;
+    }
+
+    pre {
+        background-color: #D3D3D3;
+        padding: 2px 4px 2px 4px;
+    }
+
+    .centered {
+        display: flex;
+        justify-content: center;
+    }
+
     .main {
         border: 1px solid black;
         margin: 0 auto;
-        max-width: 1800px;
+        max-width: 80%;
+        padding: 2%;
     }
 
     .it-works {
@@ -20,7 +50,7 @@
         font-weight: bold;
         padding: 9px 6px 9px 6px;
         text-align: center;
-        width: 70px;
+        width: 100px;
     }
 </style>
 
@@ -46,7 +76,7 @@
             <h2>Index</h2>
             <ol>
                 <li><a href="#installation">Installation</a></li>
-                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#a-simple-extra-web-page">Configuration</a></li>
             </ol>
         </div>
         <div>
@@ -55,84 +85,226 @@
                 <li>
                     To install the software on Linux (Debian), run the command:
                     <pre>
-                        <code>sudo apt update && sudo apt upgrade</code>
-                    </pre>
+<code>sudo apt update && sudo apt upgrade</code>
+</pre>
                 </li>
 
                 <li>
                     Then run the command:
                     <pre>
-                        <code>sudo apt install apache2</code>
-                    </pre>
-                    When prompted, press <b>Y</b> and then <b>ENTER</b> to continue
-                    with the installation, it might take a while to finish.
-                </li>
+<code>sudo apt install apache2</code>
+</pre>
+                    When prompted, press <b>Y</b> and then <b>ENTER</b> to
+                    continue with the installation, it might take a while to
+                    finish.
+                </li><br>
                 <li>
-                    To check if the server is running, try to type in the console:
+                    To check if the server is running, try to type in the
+                    console:
                     <pre>
-                        <code>sudo systemctl status apache2</code>
-                    </pre>
+<code>sudo systemctl status apache2</code>
+</pre>
                 </li>
                 <li>
                     For the server to activate automatically on boot, run the
                     command:
                     <pre>
-                        <code>sudo systemctl enable apache2</code>
-                    </pre>
+<code>sudo systemctl enable apache2</code>
+</pre>
                 </li>
                 <li>
-                    If, at some point, you wish to disable the server from starting
-                    automatically on boot, run the command:
+                    If, at some point, you wish to disable the server from
+                    starting automatically on boot, run the command:
                     <pre>
-                        <code>sudo systemctl disable apache2</code>
-                    </pre>
+<code>sudo systemctl disable apache2</code>
+</pre>
                 </li>
                 <li>
-                    To further check the status of the server, open a web browser
-                    and type the following address:
+                    To further check the status of the server, open a web
+                    browser and type the following address:
                     <pre>
-                        <code>http://localhost/</code>
-                    </pre>
-                    If the server is running, you should see the <b>Apache2 Debian
-                        Default Page</b> with a message at the top saying:
+<code>http://localhost/</code>
+</pre>
+                    If the server is running, you should see the <b>Apache2
+                        Debian Default Page</b> with a message at the top saying:
+
+                </li><br>
+                <div class="centered">
                     <div class="it-works">
                         It works!
                     </div>
-                </li>
+                </div>
             </ol>
         </div>
         <div>
-            <h2 id="configuration">Configuration</h2>
+            <h2 id="a-simple-extra-web-page">A Simple Extra Web Page</h2>
             <p>
-                Before using the server to host your applications, you might
-                want to personalize some of the settings. These can be found in
-                several configuration files:
+                The goal of the server is to host your applications either in
+                <b>Local Area Networ</b> (<b>LAN</b>) or in the <b>Internet</b>.
+                To do this, we must create a space where the website will live
+                and where the server will look for the files and the resources.
             </p>
-            <ul>
+            <h3>Creating a simple web page</h3>
+            <ol>
                 <li>
-                    <u><b>/etc/apache2/apache2.conf:</b></u> Main configuration file.
+                    In Linux, the directories related to the web applications
+                    will be located in the directory:
+                    <pre><code>/var/www</code></pre>
                 </li>
                 <li>
-                    <u><b>/etc/apache2/ports.conf:</b></u> Configuration file for the
-                    ports the server will use.
+                    Create a directory for your website; this will be the
+                    directory where you will put all the files and resources
+                    for your website. In this example, we will name it
+                    <i>example</i>:
+                    <pre><code>sudo mkdir /var/www/example</code></pre>
+                    The <i>sudo</i> command is needed since the <i>var</i> directory
+                    is a system directory and it requires administrative
+                    permissions to be changed.<br><br>
                 </li>
                 <li>
-                    <u><b>/etc/apache2/sites-available/000-default.conf:</b></u>
-                    Default virtual host configuration file.
+                    In this directory, create a file named <i>index.html</i>:
+                    <pre>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Apache 2 Server - Notes&lt;/title&gt;
+&lt;/head&gt;
+    &lt;p&gtThis is a test with Apache2 server!&lt;/p&gt
+&lt;/html&gt;</code>
+</pre>
+                    This will be the point of entry for your website, the server
+                    will look for this file when trying to access your website.
+                    <br><br>
                 </li>
-            </ul>
+                <li>
+                    This hosts the website in the server, but it is not yet
+                    exposed to the LAN or the Internet. To do this, we must
+                    write a configuration file for the server.<br><br>
+                </li>
+                <li>
+                    To create the configuration it is the most convenient to
+                    copy the default configuration file and modify it to your
+                    needs.
+                </li>
+                <li>
+                    The default configuration file is located in:
+                    <pre><code>/etc/apache2/sites-available/000-default.conf</code></pre>
+                </li>
+                <li>
+                    Copy the file to a new file in the same directory:
+                    <pre><code>sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/example.conf</code></pre>
+                    Notice that, again, the <i>sudo</i> command is needed since
+                    the <i>etc</i> directory is a system directory and it
+                    requires administrative permissions to be changed.<br><br>
+                </li>
+                <li>
+                    Open the new file with a text editor, in this case we will
+                    use <i>Visual Studio Code</i>:
+                    <pre><code>sudo code /etc/apache2/sites-available/example.conf</code></pre>
+                </li>
+                <li>
+                    In the file, look for the line that reads:
+                    <pre><code>DocumentRoot /var/www/html</code></pre>
+                    and change it to:
+                    <pre><code>DocumentRoot /var/www/example</code></pre>
+                    Make sure that the indentation is the same as the original
+                    line and you use tabs instead of spaces.<br><br>
+                </li>
+                <li>
+                    Also, notice that at the top of the file there is a line
+                    that reads:
+                    <pre><code>&lt;VirtualHost *:80&gt;</code></pre>
+                    This indicates that the server will listen to requests from
+                    any IP address in port 80, which is the default port for
+                    HTTP. It is suggested to change the port to a unique and
+                    unused port to avoid conflicts with other services that
+                    might be running in the server. To do this, simply change
+                    the line to:
+                    <pre><code>&lt;VirtualHost *:8080&gt;</code></pre>
+                    where 8080 can be replaced by any port number that is not
+                    being used by another service.<br><br>
+                </li>
+                <li>
+                    Save the changes and close the file.
+                </li>
+                <li>
+                    Enable the new site configuration by running the command:
+                    <pre><code>sudo a2ensite example.conf</code></pre>
+                </li>
+                <li>
+                    Finally, restart the server to apply the changes by running
+                    the command:
+                    <pre><code>sudo systemctl restart apache2</code></pre>
+                </li>
+                <li>
+                    If you have changed the port number in the configuration
+                    file, you must make the server listen to that port. To
+                    automate this:
+                    <ol>
+                        <li>
+                            Navigate to the directory:
+                            <pre><code>cd /etc/apache2</code></pre>
+                        </li>
+                        <li>
+                            Open the <i>ports.conf</i> file with a text editor:
+                            <pre><code>sudo code /etc/apache2/ports.conf</code></pre>
+                        </li>
+                        <li>
+                            In the file, add the following line:
+                            <pre><code>Listen 8080</code></pre>
+                            under the line that reads:
+                            <pre><code>Listen 80</code></pre>
+                            where 8080 can be replaced by the port number you
+                            have chosen.<br><br>
+                        </li>
+                        <li>
+                            Save the changes and close the file.
+                        </li>
+                        <li>
+                            Restart the server to apply the changes by running
+                            the command:
+                            <pre><code>sudo systemctl restart apache2</code></pre>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    To access the website, open a web browser and type the
+                    following address:
+                    <pre><code>http://localhost:8080/</code></pre>
+                    where 8080 can be replaced by the port number you have
+                    chosen. If everything is set up correctly, you should see
+                    the message:
+                    <pre><code>This is a test with Apache2 server!</code></pre>
+                </li>
+                <li>
+                    To access the website from another device in the same LAN,
+                    you must know the IP address of the server.
+                </li>
+                <li>
+                    To find the IP address of the server, run the command:
+                    <pre><code>ip a</code></pre>
+                    and look for the line that reads:
+                    <pre><code>inet 192.168.X.X/Y brd ...</code></pre>
+                    where X.X is the IP address of the server and Y is the
+                    network prefix.
+                </li>
+                <li>
+                    In the address bar of the web browser, type the following
+                    address:
+                    <pre><code>http://192.168.X.X:8080/</code></pre>
+                    where X.X is the IP address of the server and 8080 is the
+                    port number you have chosen in the server configuration.
+                </li>
+                <li>
+                    If everything is set up correctly, you should see the same
+                    message as before:
+                    <pre><code>This is a test with Apache2 server!</code></pre>
+                </li>
+            </ol>
+
         </div>
-        <h3>Setup - Main Configuration File</h3>
-        <p>
-            This file contains most of the basic configuration settings.
-        </p>
-        <ul>
-            <li>
-                <u><b>DefaultRuntimeDir:</b></u> The directory where the Linux
-                runtime directory is located. By default is is located in the
-                <span><code>APACHE_RUN_DIR</code></span> environment variable.
-            </li>
-        </ul>
     </div>
 </body>
 
