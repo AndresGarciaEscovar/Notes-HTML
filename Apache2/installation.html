@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache 2 Server - Notes</title>
+</head>
+<style>
+    .main {
+        border: 1px solid black;
+        margin: 0 auto;
+        max-width: 1800px;
+    }
+
+    .it-works {
+        background-color: #E9510E;
+        color: white;
+        font-family: 'Arial', 'sans-serif';
+        font-weight: bold;
+        padding: 9px 6px 9px 6px;
+        text-align: center;
+        width: 70px;
+    }
+</style>
+
+<body>
+    <div class="main">
+        <h1>Apache Server 2 Notes</h1>
+        <div>
+            <p>
+                These are the instructions to start hosting applications online with
+                the Apache 2 server in <b><u>Linux</u></b>. To host in Windows
+                and/or MacOS, there are different installation and configuration
+                instructions.
+            </p>
+            <p>
+                If you wish to host your applications using Apache 2 in Windows
+                please refer to the following links:
+            <ul>
+                <li><a href="https://httpd.apache.org/docs/2.4/platform/windows.html">Windows</a></li>
+            </ul>
+            </p>
+        </div>
+        <div>
+            <h2>Index</h2>
+            <ol>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+            </ol>
+        </div>
+        <div>
+            <h2 id="installation">Installation</h2>
+            <ol>
+                <li>
+                    To install the software on Linux (Debian), run the command:
+                    <pre>
+                        <code>sudo apt update && sudo apt upgrade</code>
+                    </pre>
+                </li>
+
+                <li>
+                    Then run the command:
+                    <pre>
+                        <code>sudo apt install apache2</code>
+                    </pre>
+                    When prompted, press <b>Y</b> and then <b>ENTER</b> to continue
+                    with the installation, it might take a while to finish.
+                </li>
+                <li>
+                    To check if the server is running, try to type in the console:
+                    <pre>
+                        <code>sudo systemctl status apache2</code>
+                    </pre>
+                </li>
+                <li>
+                    For the server to activate automatically on boot, run the
+                    command:
+                    <pre>
+                        <code>sudo systemctl enable apache2</code>
+                    </pre>
+                </li>
+                <li>
+                    If, at some point, you wish to disable the server from starting
+                    automatically on boot, run the command:
+                    <pre>
+                        <code>sudo systemctl disable apache2</code>
+                    </pre>
+                </li>
+                <li>
+                    To further check the status of the server, open a web browser
+                    and type the following address:
+                    <pre>
+                        <code>http://localhost/</code>
+                    </pre>
+                    If the server is running, you should see the <b>Apache2 Debian
+                        Default Page</b> with a message at the top saying:
+                    <div class="it-works">
+                        It works!
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2 id="configuration">Configuration</h2>
+            <p>
+                Before using the server to host your applications, you might
+                want to personalize some of the settings. These can be found in
+                several configuration files:
+            </p>
+            <ul>
+                <li>
+                    <u><b>/etc/apache2/apache2.conf:</b></u> Main configuration file.
+                </li>
+                <li>
+                    <u><b>/etc/apache2/ports.conf:</b></u> Configuration file for the
+                    ports the server will use.
+                </li>
+                <li>
+                    <u><b>/etc/apache2/sites-available/000-default.conf:</b></u>
+                    Default virtual host configuration file.
+                </li>
+            </ul>
+        </div>
+        <h3>Setup - Main Configuration File</h3>
+        <p>
+            This file contains most of the basic configuration settings.
+        </p>
+        <ul>
+            <li>
+                <u><b>DefaultRuntimeDir:</b></u> The directory where the Linux
+                runtime directory is located. By default is is located in the
+                <span><code>APACHE_RUN_DIR</code></span> environment variable.
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
