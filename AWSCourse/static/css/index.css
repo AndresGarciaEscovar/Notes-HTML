@@ -1,0 +1,27 @@
+* {
+    background-color: rgb(224, 187, 136);
+}
+
+body {
+    color: rgb(0, 0, 0);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    margin: 5px auto 10px;
+    text-align: center;
+}
+
+body > div {
+    /* border: 1px solid rgb(0, 0, 0); */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+    width: 80%;
+}
+
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
